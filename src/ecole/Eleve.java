@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class Eleve {
 
-    private String nom;
-    private String prenom;
-    private String classe;
-    private HashMap<Matiere, List<Double>> listeNote = new HashMap<>();
-    private HashMap<MatiereOptionnel, List<Double>> listeNoteOptions = new HashMap<>();
+    private final String nom;
+    private final String prenom;
+    private final String classe;
+    private final HashMap<Matiere, List<Double>> listeNote = new HashMap<>();
+    private final HashMap<MatiereOptionnel, List<Double>> listeNoteOptions = new HashMap<>();
 
     private double moyenneGenerale;
 
@@ -20,38 +20,6 @@ public class Eleve {
         Faker faker = new Faker();
         this.nom = faker.name().lastName();
         this.prenom = faker.name().firstName();
-        this.classe = classe;
-    }
-
-    public double getMoyenneGenerale() {
-        return moyenneGenerale;
-    }
-
-    public void setMoyenneGenerale(double moyenneGenerale) {
-        this.moyenneGenerale = moyenneGenerale;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getClasse() {
-        return classe;
-    }
-
-    public void setClasse(String classe) {
         this.classe = classe;
     }
 

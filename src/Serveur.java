@@ -1,9 +1,9 @@
 // echo server
+
 import ecole.Annee;
 import ecole.Ecole;
 import ecole.Matiere;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -12,11 +12,11 @@ import java.net.Socket;
 
 public class Serveur {
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         final Ecole isen = Ecole.getInstance();
         isen.genererNotes();
 
-        Socket s=null;
+        Socket s;
         ServerSocket ss2=null;
         System.out.println("Server Listening......");
         try{
@@ -31,6 +31,7 @@ public class Serveur {
 
         while(true){
             try{
+                assert ss2 != null;
                 s= ss2.accept();
                 System.out.println("connection Established");
                 ServerThread st=new ServerThread(s);
@@ -55,7 +56,7 @@ class ServerThread extends Thread{
     String line=null;
     BufferedReader  is = null;
     PrintWriter os=null;
-    Socket s=null;
+    Socket s;
     OutputStreamWriter out = null;
 
     public ServerThread(Socket s){

@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Classe {
-    private String nomClasse;
-    private Annee annee;
-    private ArrayList<Eleve> listeEleve;
-    private HashMap<Matiere, List<Double>> listeNoteClasse = new HashMap<>();
+    private final String nomClasse;
+    private final Annee annee;
+    private final ArrayList<Eleve> listeEleve;
+    private final HashMap<Matiere, List<Double>> listeNoteClasse = new HashMap<>();
 
 
     public Classe(Annee annee, String nomClasse){
@@ -36,48 +36,25 @@ public class Classe {
         });
     }
 
-    public Double getMoyenneMatiere(Matiere matiere) {
-        DoubleSummaryStatistics stats = listeNoteClasse.get(matiere).stream().mapToDouble((x) -> x).summaryStatistics();
-        return stats.getAverage();
-    }
 
     public HashMap<Matiere, List<Double>> getListeNoteClasse() {
 
         for(Eleve eleve : listeEleve) {
-            eleve.getListeNote().forEach( (matiere, note) -> {
-                listeNoteClasse.merge(matiere, note, (v1, v2) -> Stream.concat(v1.stream(), v2.stream()).collect(Collectors.toList()));
-            });
+            eleve.getListeNote().forEach( (matiere, note) -> listeNoteClasse.merge(matiere, note, (v1, v2) -> Stream.concat(v1.stream(), v2.stream()).collect(Collectors.toList())));
         }
         return listeNoteClasse;
     }
 
-    public void setListeNoteClasse(HashMap<Matiere, List<Double>> listeNoteClasse) {
-        this.listeNoteClasse = listeNoteClasse;
-    }
-
-    public String getNomClasse() {
-        return nomClasse;
-    }
-
-    public void setNomClasse(String nomClasse) {
-        this.nomClasse = nomClasse;
-    }
 
     public Annee getAnnee() {
         return annee;
     }
 
-    public void setAnnee(Annee annee) {
-        this.annee = annee;
-    }
 
     public ArrayList<Eleve> getListeEleve() {
         return listeEleve;
     }
 
-    public void setListeEleve(ArrayList<Eleve> listeEleve) {
-        this.listeEleve = listeEleve;
-    }
 
     @Override
     public String toString() {
